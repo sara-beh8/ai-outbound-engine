@@ -1,0 +1,11 @@
+account_id,company,domain,plan,motion,monthly_tickets,automation_rate,top_ticket_topic,contact_email,contact_first_name,consent_marketing,last_contacted_days
+ACC-1001,Nordlicht Outdoor,nordlicht-outdoor.example,Pro,sales_led,4200,0.06,Order status,ops@nordlicht-outdoor.example,Lena,true,64
+ACC-1002,Maison Verte Cosmetics,maison-verte.example,Basic,self_serve,880,0.09,Returns,hello@maison-verte.example,Camille,true,999
+ACC-1003,Bergström Living,bergstrom-living.example,Pro,sales_led,2600,0.11,Delivery delays,support@bergstrom-living.example,Erik,true,45
+ACC-1004,Costa Azul Travel,costa-azul-travel.example,Basic,self_serve,1500,0.04,Booking changes,team@costa-azul-travel.example,Inês,false,120
+ACC-1005,Lumen Home,lumen-home.example,Basic,self_serve,950,0.12,Order status,cx@lumen-home.example,Sam,true,12
+ACC-1006,Helix Mobile,helix-mobile.example,Advanced,sales_led,7800,0.31,Billing questions,care@helix-mobile.example,Noor,true,200
+ACC-1007,Tiny Tea Co,tinytea.example,Starter,self_serve,140,0.02,Order status,hi@tinytea.example,Mia,true,999
+ACC-1008,Fjord Footwear,fjord-footwear.example,Pro,sales_led,3100,0.08,Sizing questions,support@fjord-footwear.example,Jonas,true,88
+ACC-1009,Sol & Sal Kitchen,solesal.example,Basic,self_serve,610,0.14,Order status,ola@solesal.example,Rita,true,35
+ACC-1010,Parkside Pets,parkside-pets.example,Basic,self_serve,720,0.07,Subscription changes,,Alex,true,999

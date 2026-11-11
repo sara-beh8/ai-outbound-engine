@@ -1,0 +1,21 @@
+{% comment %}
+  Customer.io email triggered by the "outbound_signal_ready" event.
+  AI text arrives as event attributes; links come from config, never from the model.
+  Every variable has a fallback so a missing field can't break the render.
+{% endcomment %}
+
+Subject: {{ event.subject | default: "A faster way to handle repetitive tickets" }}
+
+Hi {{ customer.first_name | default: "there" }},
+
+{{ event.opener }}
+
+{{ event.proof_point }}
+
+{% if event.motion == "sales_led" %}
+<a href="{{ event.cta_url }}">Book a 20-minute consultation</a>
+{% else %}
+<a href="{{ event.cta_url }}">Set up Acme AI Agent</a>
+{% endif %}
+
+The Acme Helpdesk team

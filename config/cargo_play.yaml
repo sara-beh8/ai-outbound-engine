@@ -1,0 +1,52 @@
+# Cargo play: "Automation gap" outbound
+# A readable spec of the workflow as built in Cargo (not a Cargo export file).
+# pipeline.py runs the same steps locally on sample data.
+
+play: automation-gap-outbound
+schedule: weekly            # Monday 07:00 UTC
+owner: lifecycle-team
+
+source:
+  type: bigquery
+  query: sql/account_signals.sql      # returns eligible accounts only
+  key: account_id
+
+steps:
+  - id: dedupe
+    type: filter
+    rule: "account not already in an active sales sequence (CRM check)"
+
+  - id: route
+    type: branch
+    on: motion
+    branches:
+      self_serve: { cta: cta_urls.self_serve, follow_up: "in-app setup nudge after 3 days" }
+      sales_led:  { cta: cta_urls.sales_led,  follow_up: "task for account owner after 2 days" }
+
+  - id: personalize
+    type: ai
+    model: claude
+    prompt: templates/personalize_prompt.md      # full prompt available on request
+    inputs: [company, monthly_tickets, automation_rate, top_ticket_topic, motion]
+    output_schema: { subject: string, opener: string, proof_point_id: string }
+
+  - id: guardrails
+    type: filter
+    rules:                               # config/guardrails.json (full set on request)
+      - subject and opener within length limits
+      - no URLs in AI text (links come from config only)
+      - product names only from the dictionary
+      - proof_point_id exists
+      - no banned phrases
+    on_fail: hold_for_review             # never send, never silently fix
+
+  - id: send
+    type: customerio
+    action: track_event                  # triggers the Customer.io campaign
+    event: outbound_signal_ready
+    attributes: [subject, opener, proof_point, cta_url]
+
+measurement:
+  utm_campaign: grw-lifecycle_outbound-signal_automation-gap   # = registry slug
+  attribution: "growth-dashboard-spec: one join on utm_campaign"
+  success_metric: booked conversations per email sent

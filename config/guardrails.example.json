@@ -1,0 +1,22 @@
+{
+  "_comment": "Simplified example so the pipeline runs. The full guardrail set (product dictionary, proof-point library, banned phrases) is available on request.",
+  "product_names": ["Acme Helpdesk", "Acme AI Agent"],
+  "proof_points": {
+    "pp_auto_resolve": "Teams using Acme AI Agent resolve a large share of repetitive tickets without a human touch.",
+    "pp_order_status": "Order-status questions are the most automatable ticket type in ecommerce support."
+  },
+  "cta_urls": {
+    "self_serve": "https://app.acme-helpdesk.example/ai-agent/setup",
+    "sales_led": "https://acme-helpdesk.example/book-consultation"
+  },
+  "utm": {
+    "utm_source": "customerio",
+    "utm_medium": "email",
+    "utm_campaign": "grw-lifecycle_outbound-signal_automation-gap"
+  },
+  "limits": {
+    "subject_max_chars": 50,
+    "opener_max_chars": 280
+  },
+  "banned_phrases": ["revolutionary", "game-changing"]
+}
